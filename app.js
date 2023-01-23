@@ -11,16 +11,7 @@ const port = 8000;
 app.get("/", async (request, response) => {
    response.header({ "Access-Control-Allow-Origin": "*" });
    const result = await sql`SELECT * FROM citybike WHERE duration > 10 AND covered_distance > 10 LIMIT 100`;
-   // const time = await sql`SELECT * FROM citybike WHERE duration > 10`;
-   // const distance = await sql`SELECT * FROM citybike WHERE covered_distance > 10`;
-   // console.log(result);
    response.json({ data: result });
-   // response.json({ data: [
-   //     {name: "Alice", id: 1},
-   //     {name: "Bob", id: 2},
-   // ]
-   //    "Hello World!"
-   // });
 });
 app.listen(port, () => {
    console.log(`Now listening on port ${port}...`)
