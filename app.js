@@ -7,7 +7,7 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PROJECT_NAME } = process.env;
 const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${PROJECT_NAME}`;
 const sql = postgres(URL, { ssl: "require" });
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 app.use(cors());
 
@@ -19,7 +19,7 @@ app.get("/", async (request, response) => {
 });
 app.get("/station", async (request, response) => {
    response.header({ "Access-Control-Allow-Origin": "*" });
-  const station = await sql`SELECT * FROM address`;
+  const station = await sql`SELECT * FROM address;`;
   response.json({ data: station });
 //   console.log(address);
 });
